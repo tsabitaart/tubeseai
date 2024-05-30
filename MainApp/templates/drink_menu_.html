@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu Minuman</h1>
+    <ul>
+        {% for item in minuman %}
+            <li>{{ item.nama }} - Rp{{ item.harga }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
