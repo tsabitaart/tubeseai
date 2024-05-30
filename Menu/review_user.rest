@@ -1,0 +1,12 @@
+GET https://burgerplanet.hasura.app/api/rest/review_user
+Content-Type: application/json
+x-hasura-admin-secret: kp2SL81BuVRoK4IhX1yGrSauTX9Ng5HyPIb7Vu3rURZK770dPTdx1puj6jhCAxjz
+
+query {
+    review_user {
+        id
+        name
+        comment
+        rating
+    }
+}

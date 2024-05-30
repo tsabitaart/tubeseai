@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .review {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .review h3 {
+            color: #555;
+        }
+        .review p {
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BurgerPlanet</h1>
+    </header>
+    <div class="container">
+        <h2 class="container-title">User Reviews</h2>
+        <div class="card-slider" id="reviews"></div>
+    </div>
+
+    <script>
+        // Mengambil data dari database Hasura
+        fetch('https://burgerplanet.hasura.app/v1/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-hasura-admin-secret': 'kp2SL81BuVRoK4IhX1yGrSauTX9Ng5HyPIb7Vu3rURZK770dPTdx1puj6jhCAxjz' // Ganti dengan admin secret Anda
+            },
+            body: JSON.stringify({
+                query: `
+                    query {
+                        review_user {
+                            id
+                            name
+                            comment
+                            rating
+                        }
+                    }
+                `
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const reviewsContainer = document.getElementById('reviews');
+            data.data.review_user.forEach(review_user => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.classList.add('card');
+                reviewDiv.innerHTML = `
+                    <div class="card-content">
+                        <h3 class="card-title">${review_user.name}</h3>
+                        <p class="card-description">${review_user.comment}</p>
+                        <p class="card-description"><strong>Rating :</strong>${review_user.rating}</p>
+                    </div>
+                `;
+                reviewsContainer.appendChild(reviewDiv);
+            });
+        })
+        .catch(error => console.error('Error fetching reviews:', error));
+    </script>
+</body>
+</html>
