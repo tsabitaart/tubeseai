@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabang Restoran Burger Planet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #ff5722;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .branch {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .branch img {
+            width: 150px;
+            height: 112px; /* Maintaining 4:3 aspect ratio */
+            border-radius: 8px;
+        }
+        .branch-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .branch h3 {
+            margin: 0 0 5px 0;
+        }
+        .branch p {
+            margin: 5px 0;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Burger Planet</h1>
+        <p>Cabang Restoran Kami</p>
+    </header>
+    <div class="container">
+        <div class="branch">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/15/15/07/e8/ed-reeve.jpg" alt="Burger Planet Jakarta">
+            <div class="branch-details">
+                <h3>Burger Planet Jakarta</h3>
+                <p>Alamat: Jl. Thamrin No.10, Jakarta</p>
+                <p>Telepon: (021) 1234567</p>
+            </div>
+        </div>
+        <div class="branch">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/15/15/07/e8/ed-reeve.jpg" alt="Burger Planet Bandung">
+            <div class="branch-details">
+                <h3>Burger Planet Bandung</h3>
+                <p>Alamat: Jl. Riau No.20, Bandung</p>
+                <p>Telepon: (022) 7654321</p>
+            </div>
+        </div>
+        <div class="branch">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/15/15/07/e8/ed-reeve.jpg" alt="Burger Planet Surabaya">
+            <div class="branch-details">
+                <h3>Burger Planet Surabaya</h3>
+                <p>Alamat: Jl. Basuki Rahmat No.30, Surabaya</p>
+                <p>Telepon: (031) 8765432</p>
+            </div>
+        </div>
+        <!-- Tambahkan cabang lainnya di sini -->
+    </div>
+    <footer>
+        <p>&copy; 2024 Burger Planet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
