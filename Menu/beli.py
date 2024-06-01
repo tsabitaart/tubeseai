@@ -83,10 +83,5 @@ def beli():
     else:
         return render_template('beli.html')
     
-    
-@app.route('/struk', methods=['GET'])
-def struk():
-    return render_template('struk.html')
-    
 if __name__ == "__main__":
     app.run(debug=True, port=5004)
