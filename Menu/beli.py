@@ -14,17 +14,51 @@ def get_menu():
     menu = get_menus()
     return render_template('index.html', menu=menu)
 
-def send_to_hasura(id, nama, barang, quantity):
-    HASURA_API_URL = 'https://burgerplanet.hasura.app/v1/graphql'
-    HASURA_API_KEY = 'kp2SL81BuVRoK4IhX1yGrSauTX9Ng5HyPIb7Vu3rURZK770dPTdx1puj6jhCAxjz'
+HASURA_API_URL = 'https://burgerplanet.hasura.app/v1/graphql'
+HASURA_API_KEY = 'kp2SL81BuVRoK4IhX1yGrSauTX9Ng5HyPIb7Vu3rURZK770dPTdx1puj6jhCAxjz'
 
-    if id is not None and id.strip():  
-        id = int(id)  # Mengonversi id ke integer jika perlu
+def get_max_id_formulir_from_hasura():
+    query = '''
+        query GetFormulir {
+            formulir_aggregate {
+                aggregate {
+                    max {
+                        id
+                    }
+                }
+            }
+        }
+
+    '''
+    
+    headers = {
+        'Content-Type': 'application/json',
+        'x-hasura-admin-secret': HASURA_API_KEY
+    }
+
+    response = requests.post(HASURA_API_URL, json={'query': query}, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        if 'errors' in data:
+            print('GraphQL Errors:', data['errors'])
+            return None
+        return data['data']['formulir_aggregate']['aggregate']['max']['id']
     else:
+        print('Error fetching max idUlasan from Hasura:', response.status_code, response.text)
+        return None
+
+def send_to_hasura(id, nama, barang, quantity):
+
+    max_id_formulir = get_max_id_formulir_from_hasura()
+    if max_id_formulir is None:
         return False
+
+    new_id_formulir = max_id_formulir + 1
+
     
     variables = {
-        "id": random.randint(1, 999999999),
+        "id": new_id_formulir,
         "nama": nama,
         "barang": barang,
         "quantity": quantity,
